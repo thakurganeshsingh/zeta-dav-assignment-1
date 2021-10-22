@@ -1,0 +1,211 @@
+openapi: 3.0.0
+info:
+  title: Zeta - DAV Assignment
+  version: '1.0'
+  contact:
+    name: Thakur Ganeshsingh
+    url: 'https://thakurganeshsingh.com'
+    email: thakurg785@gmail.com
+  license:
+    name: GNU AGPLv3
+    url: 'https://test.com'
+  description: |-
+    Zeta has made a payment to one of its employees using the Payments API. This document describes the Mock  API for the given use case. The API  is running on the [Postman Mock server](https://29e7571d-0c78-4754-a49d-4dd4ca4f62db.mock.pstmn.io). Click [here](https://learning.postman.com/docs/designing-and-developing-your-api/mocking-data/setting-up-mock/) to know more about Postman Mocking
+
+    # API Reference
+
+    This Mock API adheres to REST standards. The API has predictable resource-oriented URLs, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.
+
+    # Zeta DAV Mock API
+    The API exposes a single GET endpoint ```test_writer_test``` that returns the payment information to the requester. Considering it follows standard HTTP standards, responses such as Unauthorized and Bad requests to the document.
+
+    ## Authentication
+    The mock API is a public endpoint without authentication and security constraints. Since the API is REST compliant, it is accessible via various utilities such as command-line utilities, API tools, and GUI-based browsers. No additional security headers such as apiKey, HTTP, bearer, mutual, negotiate, Oauth, OAuth2, OpenIDConnet, etc are not required.
+servers:
+  - url: 'https://29e7571d-0c78-4754-a49d-4dd4ca4f62db.mock.pstmn.io'
+    description: Zeta Mock Server
+paths:
+  /tech_writer_test:
+    get:
+      summary: Get Payments Information
+      tags:
+        - Payments API
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/payment'
+              examples:
+                successful-response:
+                  value:
+                    paymentID: 8439eknhvutcvh44425ut
+                    currency: INR
+                    amount: 2000
+                    debitAccountID: c3b61955-f392-4f7a-905b-d561a462decc
+                    creditAccountID: 422782d2-adcd-49a6-bde1-eb0461a582ba
+                    method: upi
+                    status: SUCCESS
+                    fee: 24
+                    tax: 4
+                    remarks: Virtual Team Outing
+                    error_code: null
+                    error_description: null
+                    error_source: null
+                    error_step: null
+                    error_reason: null
+                    created_at: 1606985209
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+              examples:
+                request-validation-failed:
+                  value:
+                    error:
+                      name: mockRequestNotFoundError
+                      message: Double check your method and the request path and try again.
+                      header: No matching requests
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+              examples:
+                unauthorized:
+                  value:
+                    error:
+                      name: 401 UNAUTHORIZED
+                      message: Unauthorized
+                      header: No matching requests
+      operationId: Get Payment Information for Test Writer
+      description: "The endpoint test_writer_test is a simple HTTP GET call without any parameter, body, or argument. The endpoint can be invoked/accessed in various methods.\n\n## Accessing Endpoint\nBelow are how the endpoint can be accessed in different ways.\n\n### cURL\n```json\ncurl --request GET \\\n  --url https://29e7571d-0c78-4754-a49d-4dd4ca4f62db.mock.pstmn.io/tech_writer_test \\\n  --header 'Content-Type: application/json'\n```\n### PHP - HTTP2\n```json\n<?php\n\n$client = new http\\Client;\n$request = new http\\Client\\Request;\n\n$request->setRequestUrl('https://29e7571d-0c78-4754-a49d-4dd4ca4f62db.mock.pstmn.io/tech_writer_test');\n$request->setRequestMethod('GET');\n$request->setHeaders([\n  'Content-Type' => 'application/json'\n]);\n\n$client->enqueue($request)->send();\n$response = $client->getResponse();\n\necho $response->getBody();\n```\n### Python - using Python 3\n```json\nimport http.client\n\nconn = http.client.HTTPSConnection(\"29e7571d-0c78-4754-a49d-4dd4ca4f62db.mock.pstmn.io\")\n\nheaders = { 'Content-Type': \"application/json\" }\n\nconn.request(\"GET\", \"/tech_writer_test\", headers=headers)\n\nres = conn.getresponse()\ndata = res.read()\n\nprint(data.decode(\"utf-8\"))\n```\n### Python - using Python Requests\n```json\nimport requests\n\nurl = \"https://29e7571d-0c78-4754-a49d-4dd4ca4f62db.mock.pstmn.io/tech_writer_test\"\n\nheaders = {'Content-Type': 'application/json'}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)\n```\n### Go\n```json\npackage main\n\nimport (\n\t\"fmt\"\n\t\"net/http\"\n\t\"io/ioutil\"\n)\n\nfunc main() {\n\n\turl := \"https://29e7571d-0c78-4754-a49d-4dd4ca4f62db.mock.pstmn.io/tech_writer_test\"\n\n\treq, _ := http.NewRequest(\"GET\", url, nil)\n\n\treq.Header.Add(\"Content-Type\", \"application/json\")\n\n\tres, _ := http.DefaultClient.Do(req)\n\n\tdefer res.Body.Close()\n\tbody, _ := ioutil.ReadAll(res.Body)\n\n\tfmt.Println(res)\n\tfmt.Println(string(body))\n\n}\n```"
+    parameters: []
+components:
+  schemas:
+    payment:
+      description: ''
+      type: object
+      x-examples:
+        payment-sample:
+          paymentID: 8439eknhvutcvh44425ut
+          currency: INR
+          amount: 2000
+          debitAccountID: c3b61955-f392-4f7a-905b-d561a462decc
+          creditAccountID: 422782d2-adcd-49a6-bde1-eb0461a582ba
+          method: upi
+          status: SUCCESS
+          fee: 24
+          tax: 4
+          remarks: Virtual Team Outing
+          error_code: null
+          error_description: null
+          error_source: null
+          error_step: null
+          error_reason: null
+          created_at: 1606985209
+      properties:
+        paymentID:
+          type: string
+          minLength: 1
+          description: Unique identifier for Payment Object
+        currency:
+          type: string
+          minLength: 1
+          description: 'Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a supported currency.'
+        amount:
+          type: number
+          description: A positive integer in currency units representing how much amount of currency units have been transferred or paid to.
+        debitAccountID:
+          type: string
+          minLength: 1
+          description: Debit Account ID indicating the account identifier from which the amount has been debited
+        creditAccountID:
+          type: string
+          minLength: 1
+          description: Credit Account ID indicating the account identifier to which the amount has been deposited
+        method:
+          type: string
+          minLength: 1
+          description: 'Method, indicates the type of the PaymentMethod. The possible options may include, UPI, Cash, Card, Netbanking etc.'
+        status:
+          type: string
+          minLength: 1
+          description: 'The status of the payment is either ```succeeded```, ```pending```, or ```failed```.'
+        fee:
+          type: number
+          description: Fees (in currency units) paid for performing this transaction.
+        tax:
+          type: number
+          description: The amount of tax levied on this transaction.
+        remarks:
+          type: string
+          minLength: 1
+          description: 'Transaction remarks, this field is used to indicate the intent of the transaction.'
+        error_code:
+          description: Error identifier/enumerator used to denote the error category/code
+          type: string
+        error_description:
+          type: string
+          description: 'Error decription, provides detailed information associated with the error code'
+        error_source:
+          type: string
+          description: Origin or source of error
+        error_step:
+          type: string
+          description: The step in transaction where the error has occured
+        error_reason:
+          type: string
+          description: Reason for error occurrence
+        created_at:
+          type: number
+          description: Transaction creation timestamp
+      required:
+        - paymentID
+        - currency
+        - amount
+        - debitAccountID
+        - creditAccountID
+        - method
+        - status
+        - fee
+        - tax
+        - remarks
+        - created_at
+    error:
+      description: ''
+      type: object
+      x-examples:
+        bad-request:
+          error:
+            name: mockRequestNotFoundError
+            message: Double check your method and the request path and try again.
+            header: No matching requests
+      properties:
+        error:
+          type: object
+          required:
+            - name
+            - message
+            - header
+          description: Error Object
+          properties:
+            name:
+              type: string
+              minLength: 1
+              description: 'Name of the error occured. Possible examples are ```400 Bad Reqeust```, ```401 Unauthorized```, or ```XXXX Custom Error Code```'
+            message:
+              type: string
+              minLength: 1
+              description: Associated information with error codes that provides details about the error
+            header:
+              type: string
+              minLength: 1
+              description: HTTP header informaton or Standard header message returned from server providing insights about the error occured
+      required:
+        - error
+  securitySchemes: {}
